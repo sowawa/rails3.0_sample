@@ -1,0 +1,24 @@
+[setup]
+ln -s public public_html
+mv public/flx_dispatch.fcgi public/dispatch.fcgi
+chmod 705 public/dispatch.fcgi
+mkdir log
+touch log/production.log
+chmod 606 log/production.log
+chmod 707 ./log
+
+[replace]
+config/database.yml FLX_DB_NAME PROJECT_NAME
+config/database.yml FLX_DB_HOST DB_HOST
+config/database.yml FLX_DB_USER DB_USER
+config/database.yml FLX_DB_PASS DB_PASSWORD
+public/dispatch.fcgi USER_NAME PROJECT_NAME
+
+[setup]
+bash fluxflex_setup.sh
+bash fluxflex_rake.sh
+
+[deploy]
+bash fluxflex_deploy.sh
+
+
